@@ -1,6 +1,7 @@
 Projeto YourMusic
 
-https://user-images.githubusercontent.com/99992471/199587218-5f4167c9-2087-4908-bb3b-efbee87c12d2.mp4
+https://user-images.githubusercontent.com/99992471/199588476-439c2067-3a00-4e8c-a848-76e0e5ecba02.mp4
+
 
 
 

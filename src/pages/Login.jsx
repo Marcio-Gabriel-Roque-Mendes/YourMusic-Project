@@ -61,10 +61,14 @@ class Login extends Component {
         
         <main>
           <div>
-            <h1 className='mt-5 mb-5 text-center text-3xl'>LOGIN</h1>
+            <h1 className='mt-5 mb-5 text-center text-3xl text-purple-900'>
+              LOGIN
+            </h1>
             <form>
               <label htmlFor="name" className='block text-center' >
+                <p className='text-indigo-900'>
                 Nome de usuário:
+                </p>
                 <input
                   id="name"
                   name="name"
@@ -73,7 +77,7 @@ class Login extends Component {
                   maxLength={ 40 }
                   onChange={ this.onInputChange }
                   value={ name }
-                  className=" text-center block bg-gray-200 border-2 rounded border-violet-500"
+                  className=" text-center block bg-gray-200 border-2 rounded border-violet-900"
                 />
               </label>
               <br />
@@ -83,7 +87,7 @@ class Login extends Component {
                 type="submit"
                 onClick={ this.onEnterButtonClick }
                 disabled={ isEnterButtonDisabled }
-                className="block bg-fuchsia-700 min-w-full rounded-xl"
+                className="block bg-fuchsia-700 min-w-full rounded-xl text-white font-bold"
               >
                 Entrar
               </button>

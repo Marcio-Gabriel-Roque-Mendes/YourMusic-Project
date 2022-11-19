@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import Album from '../components/Header';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
-import getMusics from '../services/musicsAPI';
+// import getMusics from '../services/musicsAPI';
 
 class MusicCard extends Component {
   state = {
     loading: false,
     favoritesSongs: [],
     carregando: false,
+    isFavorite: false,
+    listOfSongs: [],
   }
 
   async componentDidMount() {
@@ -19,30 +21,80 @@ class MusicCard extends Component {
     });
   }
 
-  onListFavoriteChange = async ({ target }) => {
-    this.setState({ loading: true });
-    const { trackId } = this.props;
-    const { checked } = target;
-    const { favoritesSongs } = this.state;
-    const pegaMusicaFavorita = await getMusics(trackId);
+  // onListFavoriteChange = async ({ target }) => {
+  //   this.setState({ loading: true });
+  //   const { trackId } = this.props;
+  //   const { checked } = target;
+  //   const { favoritesSongs } = this.state;
+  //   const pegaMusicaFavorita = await getMusics(trackId);
 
-    // this.setState({ loading: true });
-    // await addSong({ trackId });
-    // this.setState({ loading: false });
+  //   if (checked) {
+  //     await addSong(pegaMusicaFavorita);
+  //     this.setState({ favoritesSongs: [...favoritesSongs, pegaMusicaFavorita] });
+  //     this.setState({ loading: false });
+  //   }
+  //   if (checked === false) {
+  //     await removeSong(trackId);
+  //     const CurrentFavorites = favoritesSongs
+  //       .filter((musica) => musica.trackId !== trackId);
+  //     this.setState({ favoritesSongs: CurrentFavorites });
+  //     this.setState({ loading: false });
+  //   }
+  // }
 
-    if (checked) {
-      await addSong(pegaMusicaFavorita);
-      this.setState({ favoritesSongs: [...favoritesSongs, pegaMusicaFavorita] });
-      this.setState({ loading: false });
-    }
-    if (checked === false) {
-      await removeSong(trackId);
-      const CurrentFavorites = favoritesSongs
-        .filter((musica) => musica.trackId !== trackId);
-      this.setState({ favoritesSongs: CurrentFavorites });
-      this.setState({ loading: false });
-    }
+  getFavoriteSongsList = async () => {
+    const favoriteSongsList = await getFavoriteSongs();
+    this.setState({ favoritesSongs: favoriteSongsList });
   }
+
+  handleChange = async ({ target }) => {
+    const { checked } = target;
+    const { trackId, getFavoriteSongsList, musica } = this.props;
+    this.setState({
+      loading: true,
+    });
+    if (checked) {
+      await addSong(musica);
+      await this.getFavoriteSongsList();
+    } else {
+      await removeSong({ trackId });
+      if (getFavoriteSongsList) {
+        await getFavoriteSongsList();
+      }
+    }
+    this.setState({ loading: false });
+  }
+
+  // markAsFav = () => {
+  //   const { trackId } = this.props;
+  //   const { favoritesSongs } = this.state;
+  //   if (favoritesSongs.some((song) => song.trackId === trackId)) {
+  //     this.setState({ isFavorite: true });
+  //   }
+  // }
+
+  // getListOfSongs = async () => {
+  //   const { trackId } = this.props;
+  //   const pegaMusicaFavorita = await getMusics(trackId);
+  //   this.setState({ listOfSongs: pegaMusicaFavorita },
+  //     () => this.updateState(pegaMusicaFavorita));
+  // }
+
+  // // função para adicionar a musica aos favoritos
+  // addSongToFavorites = async () => {
+  //   const { listOfSongs } = this.state
+  //   const cancao = listOfSongs.flatMap((song) => song.kind === 'song')
+  //   this.setState({ loading: true });
+  //   await addSong(cancao);
+  //   this.setState({ loading: false });
+  // }
+
+  // // função para remover a musica dos favoritos
+  // removeSongFromFavorites = async () => {
+  //   this.setState({ loading: true });
+  //   await removeSong(this.props);
+  //   this.setState({ loading: false });
+  // }
 
   render() {
     const { previewUrl, trackName, trackId, /*artworkUrl100*/ } = this.props;
@@ -71,9 +123,9 @@ class MusicCard extends Component {
             <input
               type="checkbox"
               name="favorita"
-              checked={ favoritesSongs.some((song) => song.trackId === trackId) }
+              checked={ favoritesSongs.some((song) => song.trackName === trackName) }
               data-testid={ `checkbox-music-${trackId}` }
-              onChange={ this.onListFavoriteChange }
+              onChange={ this.handleChange }
             />
           </label>
         </div>
@@ -86,6 +138,8 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   trackId: PropTypes.string.isRequired,
   artworkUrl100: PropTypes.string.isRequired,
+  getFavoriteSongsList: PropTypes.func.isRequired,
+  musica: PropTypes.objectOf.isRequired,
 };
 
 export default MusicCard;

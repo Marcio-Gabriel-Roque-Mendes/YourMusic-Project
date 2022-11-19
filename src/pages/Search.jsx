@@ -49,19 +49,21 @@ class Search extends Component {
   }
 
   estruturarCadaAlbum = (albuns) => albuns.map((album) => (
-    <div key={ album.collectionName } className='w-52 text-center content-center border-solid border-4 border-black-600 mx-2 my-3 rounded text-fuchsia-900 '>
+    <div key={ album.collectionName } className='w-56 text-center content-center border-solid border-1 border-black-600 mx-px my-3 
+     rounded text-fuchsia-900 '>
+      <img src={ album.artworkUrl100 } alt={ album.artistName } className='w-56 justify-center rounded '/>
+
       <Link
         to={ `/album/${album.collectionId}` }
         data-testid={ `link-to-album-${album.collectionId}` }
       >
-        <img src={ album.artworkUrl100 } alt={ album.artistName } className='w-52 rounded'/>
-
         <p className="bg-indigo-700 hover:bg-indigo-500 text-white font-bold py-1 px-1 my-3 rounded-full">
         Musicas
         </p>
         {' '}
 
       </Link>
+
       {/* <h4 key={ album.artistId }>
         artistId:
         {' '}
@@ -112,7 +114,6 @@ class Search extends Component {
         ,
       </h4> */}
       </div>
-
   ));
 
   render() {
@@ -120,9 +121,9 @@ class Search extends Component {
       nameArtist, loading, nomeArtistaPosterior, todasMusicas } = this.state;
 
     const condicicaoLoading = loading ? <div className='bg-violet-100 text-purple-700'>Carregando...</div> : (
-      <form className='flex justify-center mb-2.5 mt-5 text-indigo-800'>
+      <form className='flex justify-center mb-2.5 mt-20 text-indigo-800'>
         <label htmlFor="nameArtist" className='flex flex-row'>      
-          <div className='text-2xl'>
+          <div className='text-xl font-bold'>
           Nome do Artista:
           </div>
           <input
@@ -150,7 +151,7 @@ class Search extends Component {
     );
 
     const condicaoResultAlbuns = nomeArtistaPosterior.length !== 0 && (
-      <p className='flex justify-center mb-2.5 text-indigo-800'>
+      <p className='flex justify-center mb-20 text-indigo-800'>
         Resultado de álbuns de:
         {' '}
         {nomeArtistaPosterior}
@@ -161,14 +162,14 @@ class Search extends Component {
       ? <p className='text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas);
 
     return (
-      <div data-testid="page-search" className='flex flex-col flex-wrap content-start bg-violet-100'>
+      <div data-testid="page-search" className='flex flex-col flex-wrap /*content-center*/ bg-violet-100'>
         <Header />
         { condicicaoLoading }
         <div>
           {condicaoResultAlbuns}
         </div>
         {/* { this.estruturarCadaAlbum(todasMusicas) } */}
-        <div className='flex flex-row flex-wrap justify-between ml-5 '>
+        <div className='flex flex-row flex-wrap justify-between pr-14 pl-14' >
         { condicaoSeRenderizaAlbum }
         </div>
 

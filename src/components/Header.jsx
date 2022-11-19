@@ -24,7 +24,7 @@ class Header extends Component {
     }
     return (
       <><header data-testid="header-component" className='flex flex-row justify-between items-center py-2.5 px-5 bg-gray-300'>
-        <h1 className="text-6xl my-4 text-purple-800">
+        <h1 className="text-6xl my-3 text-purple-800">
           {/* <img src={imageMusica} alt="Logo de nota musical" />  */}
           YourMusic
         </h1>

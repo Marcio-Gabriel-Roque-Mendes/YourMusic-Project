@@ -3,6 +3,7 @@ import { Link /* Route */ } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 // import '../albunsList.css'
+import LoadingThree from '../components/LoadingThree';
 
 var moment = require('moment'); // require moment().format(); 
 
@@ -120,8 +121,8 @@ class Search extends Component {
     const { isSearchButtonDisabled,
       nameArtist, loading, nomeArtistaPosterior, todasMusicas } = this.state;
 
-    const condicicaoLoading = loading ? <div className='bg-violet-100 text-purple-700'>Carregando...</div> : (
-      <form className='flex justify-center mb-2.5 mt-20 text-indigo-800'>
+    const condicicaoLoading = loading ? /*<div className='bg-violet-100 text-purple-700'>Carregando...</div>*/ <LoadingThree />: (
+      <form className='flex justify-center mb-2.5 mt-10 text-indigo-800'>
         <label htmlFor="nameArtist" className='flex flex-row'>      
           <div className='text-xl font-bold'>
           Nome do Artista:
@@ -159,7 +160,7 @@ class Search extends Component {
     );
 
     const condicaoSeRenderizaAlbum = todasMusicas.length === 0
-      ? <p className='text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas);
+      ? <p className='flex content-center text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas);
 
     return (
       <div data-testid="page-search" className='flex flex-col flex-wrap /*content-center*/ bg-violet-100'>

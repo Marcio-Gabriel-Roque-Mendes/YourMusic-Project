@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import LoadingOne from '../components/LoadingOne';
 import { createUser } from '../services/userAPI';
 // import {cap} from '../../src/images/'
 
@@ -43,7 +44,7 @@ class Login extends Component {
     const { isEnterButtonDisabled, name, loading, redirect } = this.state;
 
     if (loading) {
-      return <div>Carregando...</div>;
+      return <LoadingOne/> /*<div>Carregando...</div>*/;
     }
     if (redirect) {
       return <Redirect to="/search" />;

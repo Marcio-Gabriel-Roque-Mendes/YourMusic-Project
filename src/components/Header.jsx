@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import LoadingSix from './LoadingSix';
 
 class Header extends Component {
   state = {
@@ -20,7 +21,7 @@ class Header extends Component {
     const { /*user*/ loading } = this.state;
 
     if (loading) {
-      return <div className='text-indigo-800'>Carregando...</div>;
+      return <LoadingSix/> /*<div className='text-indigo-800'>Carregando...</div>*/ ;
     }
     return (
       <><header data-testid="header-component" className='flex flex-row justify-between items-center py-2.5 px-5 bg-gray-300 mb-8'>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import LoadingOne from '../components/LoadingOne';
 import { createUser } from '../services/userAPI';
+import loadingOneGIF from '../assets/loading1.gif';
+
 // import {cap} from '../../src/images/'
 
 class Login extends Component {
@@ -38,6 +40,10 @@ class Login extends Component {
       .then(() => {
         this.setState({ loading: false, redirect: true });
       });
+  }
+
+  componentDidMount(){
+    document.title = 'YourMusic'
   }
 
   render() {

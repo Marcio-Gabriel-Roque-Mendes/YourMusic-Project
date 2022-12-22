@@ -135,6 +135,8 @@ class Search extends Component {
             maxLength={ 40 }
             onChange={ this.onInputChange }
             value={ nameArtist }
+            autocomplete='off'
+            placeholder='Escreva aqui'
             className='text-center bg-gray-100 border-2 rounded border-violet-900 ml-2.5'
           />
         </label>

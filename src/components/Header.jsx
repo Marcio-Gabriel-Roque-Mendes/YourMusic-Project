@@ -30,7 +30,7 @@ class Header extends Component {
           YourMusic
         </h1>
         <nav className='text-indigo-900 '>
-          <Link to="/">Home </Link>
+          <Link to="/" className='mx-2.5 hover:text-indigo-500 hover:font-bold'>Home </Link>
           {/* <Link to="/profile" data-testid="link-to-profile" className='mx-2.5 hover:text-indigo-500 hover:font-bold'>User </Link> */}
           {' '}
           <Link to="/search" data-testid="link-to-search" className='mx-2.5 hover:text-indigo-500 hover:font-bold'>Pesquisar</Link>

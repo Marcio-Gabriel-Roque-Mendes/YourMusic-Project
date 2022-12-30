@@ -1,0 +1,12 @@
+Com base no projeto TrybeTunes que fui desafiado a desenvolver na Trybe, fiz o YourMusic essa é uma aplicação capaz de reproduzir músicas das mais variadas bandas e artistas, e criar uma lista de músicas favoritas, o projeto foi construído utilizando os dados requisitados da API do Itunes e então manipulados por JavaScript no React.
+
+No YourMusic após logar é possível: pesquisar por uma banda ou artista, listar os álbuns disponíveis dessa banda ou artista, visualizar as músicas de um álbum selecionado, reproduzir uma prévia das músicas deste álbum, favoritar e desfavoritar música e ver a lista de músicas favoritas.
+
+Esse projeto foi desenvolvido usando componentes de classe, e algumas habilidades necessarias para o desenvolvimento do projeto foram: fazer requisições e consumir de uma API, trabalhar com atualização de estados, ciclos de vida de um componente React, criação de rotas, utilizar o componente BrowserRouter e trabalhar com links de navegação.
+
+Essa é minha primeira aplicação em React utilizando rotas. Para estilização usei o framework Tailwind.
+
+Veja a aplicação em funcionamento: 
+Veja o repositório da aplicação: 
+
+#react #javascript #desenvolvimento #trybe #vqv

@@ -45,7 +45,7 @@ class Album extends Component {
   getListOfSongs = async () => {
     const { match: { params: { id } } } = this.props;
     const pegaMusicas = await getMusics(id);
-    const favoriteSongsList = await getFavoriteSongs();
+    // const favoriteSongsList = await getFavoriteSongs();
     this.setState({ 
       pegaListaMusicas: pegaMusicas,
       musicaPorId: pegaMusicas.filter((songTrackId) => songTrackId.trackId) },
@@ -55,7 +55,7 @@ class Album extends Component {
 
   render() {
     const { pegaListaMusicas, musicaPorId, artistName,
-    collectionName, artworkUrl100, favoriteSongsList} = this.state;
+    collectionName, artworkUrl100, /*favoriteSongsList*/} = this.state;
     return (
         <div className='bg-violet-100'>
           <Header />

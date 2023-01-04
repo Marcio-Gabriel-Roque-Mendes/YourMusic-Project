@@ -38,8 +38,6 @@ Esse projeto permite reproduzir prévia de músicas das mais variadas bandas e a
 - [React Router Dom](https://reactrouter.com/en/main)
 - [Moment.js](https://momentjs.com/)
 - [Fetch API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
-- [Jest](https://jestjs.io/pt-BR/)
-- [RTL - React Test Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Tailwind](https://tailwindcss.com/)
 
 ## Como utilizar o projeto na sua máquina

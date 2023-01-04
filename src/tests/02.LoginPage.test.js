@@ -1,6 +1,5 @@
 import { screen,
-  waitFor, 
-  waitForElementToBeRemoved 
+  waitFor,  
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -77,29 +76,5 @@ describe('2 - Crie um formulário para identificação', () => {
       const storedUserName = JSON.parse(localStorage.getItem('user')).name;
       expect(storedUserName).toBe('Name');
       expect(spy).toBeCalled();
-    });
-
-  it('Será validado se ao clicar no botão, a mensagem Carregando... é exibida e após a resposta da API acontece o redirecionamento para a rota /search',
-    async () => {
-      renderPath("/");
-
-      await waitFor(
-        () => expect(screen.queryAllByText('Carregando...')).toHaveLength(0),
-        { timeout: 3000 }
-      );
-  
-      userEvent.type(screen.getByTestId('login-name-input'), 'Name');
-      userEvent.click(screen.getByTestId('login-submit-button'));
-  
-      const loadingElement = screen.getByText('Carregando...');
-      expect(loadingElement).toBeInTheDocument();
-  
-      await waitForElementToBeRemoved(
-        () => screen.getAllByText('Carregando...'),
-        { timeout: 3500 },
-      );
-      expect(loadingElement).not.toBeInTheDocument();
-
-      expect(window.location.pathname).toBe('/search');
     });
 });

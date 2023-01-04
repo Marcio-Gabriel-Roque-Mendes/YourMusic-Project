@@ -62,30 +62,6 @@ Inicie a aplicação
 ```
  npm start
 ```
-Rode todos os testes com o seguinte comando:
-```
-npm run test 
-```
-Para rodar um teste em específico, digite o seguinte comando, seguido do nome de arquivo de teste que deseja executar. Exemplo:
-```
-npm run test CardGame.test.js
-```
-- Dica: Todos os arquivos de testes desenvolvidos para esse projeto podem ser encontrado no seguinte diretorio:
-```
-src/tests
-```
-![Captura de tela de 2023-01-03 20-57-50](https://user-images.githubusercontent.com/99992471/210460937-f9eee0bc-72e7-4b39-941a-383b542bacbd.png)
-
-<strong/>Este projeto foi desenvolvido em grupo por:</strong>
-
-* Bruno Emanuel
-* Cesar Holanda
-* Marcelo Lima
-* Marcio Gabriel
-
-Utilizamos a metodologia agil Kanban para a gestão de fluxo do nosso trabalho pelo Trello, em paralelo com outras ferramentas de comunicação assíncrona neste caso o Slack e comunicação síncrona sendo o Zoom para videochamada. 
-
-Mais informações dos colaboradores do projeto podem ser encontradas nessa [publicação feita no Linkedin.](https://www.linkedin.com/posts/marcio-gabriel-roque_frontend-react-redux-activity-7016201802920407040-wxwq?utm_source=share&utm_medium=member_desktop)
 
 ## Prévia da aplicação rodando:
 https://user-images.githubusercontent.com/99992471/204411251-16bdcf0c-5ada-4ed9-b45b-c6b2d475453e.mp4

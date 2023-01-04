@@ -45,7 +45,7 @@ Esse projeto permite reproduzir prévia de músicas das mais variadas bandas e a
 ## Como utilizar o projeto na sua máquina
 <strong>1. Deploy:</strong>
 </br>
-https://newtrivianeon.netlify.app/
+https://yourmusic-now.netlify.app/
 
 <strong>2. Faça o git clone na sua máquina e entre no diretório:</strong>
  - Lembre-se de clonar o repositório no diretório desejado na sua máquina!
@@ -64,8 +64,10 @@ Inicie a aplicação
 ```
 
 ## Prévia da aplicação rodando:
-https://user-images.githubusercontent.com/99992471/204411251-16bdcf0c-5ada-4ed9-b45b-c6b2d475453e.mp4
 
-Este projeto foi desenvolvido inspirado no projeto Trybe Tunes proposto no curso de Desenvolvimento Full Stack da [Trybe](https://www.betrybe.com/) no qual os alunos deveriam desenvolve-lo para fins didaticos
+https://user-images.githubusercontent.com/99992471/210630189-6f13fdf5-106d-4815-b10e-c9a1959e4e1f.mp4
+
+Este projeto foi desenvolvido inspirado no projeto Trybe Tunes proposto no curso de Desenvolvimento Full Stack da [Trybe](https://www.betrybe.com/) no qual os alunos deveriam desenvolve-lo para fins didáticos
+
 
 

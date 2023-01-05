@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import Album from '../components/Header';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import LoadingTwo from '../components/LoadingTwo';
-// import getMusics from '../services/musicsAPI';
 
 class MusicCard extends Component {
   state = {
@@ -21,27 +19,6 @@ class MusicCard extends Component {
       favoritesSongs: favoritas,
     });
   }
-
-  // onListFavoriteChange = async ({ target }) => {
-  //   this.setState({ loading: true });
-  //   const { trackId } = this.props;
-  //   const { checked } = target;
-  //   const { favoritesSongs } = this.state;
-  //   const pegaMusicaFavorita = await getMusics(trackId);
-
-  //   if (checked) {
-  //     await addSong(pegaMusicaFavorita);
-  //     this.setState({ favoritesSongs: [...favoritesSongs, pegaMusicaFavorita] });
-  //     this.setState({ loading: false });
-  //   }
-  //   if (checked === false) {
-  //     await removeSong(trackId);
-  //     const CurrentFavorites = favoritesSongs
-  //       .filter((musica) => musica.trackId !== trackId);
-  //     this.setState({ favoritesSongs: CurrentFavorites });
-  //     this.setState({ loading: false });
-  //   }
-  // }
 
   getFavoriteSongsList = async () => {
     const favoriteSongsList = await getFavoriteSongs();
@@ -66,42 +43,11 @@ class MusicCard extends Component {
     this.setState({ loading: false });
   }
 
-  // markAsFav = () => {
-  //   const { trackId } = this.props;
-  //   const { favoritesSongs } = this.state;
-  //   if (favoritesSongs.some((song) => song.trackId === trackId)) {
-  //     this.setState({ isFavorite: true });
-  //   }
-  // }
-
-  // getListOfSongs = async () => {
-  //   const { trackId } = this.props;
-  //   const pegaMusicaFavorita = await getMusics(trackId);
-  //   this.setState({ listOfSongs: pegaMusicaFavorita },
-  //     () => this.updateState(pegaMusicaFavorita));
-  // }
-
-  // // função para adicionar a musica aos favoritos
-  // addSongToFavorites = async () => {
-  //   const { listOfSongs } = this.state
-  //   const cancao = listOfSongs.flatMap((song) => song.kind === 'song')
-  //   this.setState({ loading: true });
-  //   await addSong(cancao);
-  //   this.setState({ loading: false });
-  // }
-
-  // // função para remover a musica dos favoritos
-  // removeSongFromFavorites = async () => {
-  //   this.setState({ loading: true });
-  //   await removeSong(this.props);
-  //   this.setState({ loading: false });
-  // }
-
   render() {
-    const { previewUrl, trackName, trackId, /*artworkUrl100*/ } = this.props;
+    const { previewUrl, trackName, trackId } = this.props;
     const { loading, favoritesSongs, carregando } = this.state;
 
-    const condicionalLoading = loading && <LoadingTwo /> /*<div>Carregando...</div>*/;
+    const condicionalLoading = loading && <LoadingTwo />;
     const condicioanlCarregando = carregando && <div>Carregando...</div>;
     return (
       <div className='flex justify-center content-center'>
@@ -109,7 +55,6 @@ class MusicCard extends Component {
         {condicioanlCarregando}
 
         <div className="mb-12 flex flex-col border-solid border-4 border-black-600">
-          {/* <img src={ artworkUrl100 } alt="artwork da imagem" /> */}
           <span className='text-violet-700 font-bold mb-1 text-2xl'>{ trackName }</span>
           <audio data-testid="audio-component" src={ previewUrl } controls>
             <track kind="captions" />

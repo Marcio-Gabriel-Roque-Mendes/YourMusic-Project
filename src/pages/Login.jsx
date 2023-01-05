@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import LoadingOne from '../components/LoadingOne';
 import { createUser } from '../services/userAPI';
-// import loadingOneGIF from '../assets/loading1.gif';
-
-// import {cap} from '../../src/images/'
 
 class Login extends Component {
   state = {
@@ -50,7 +47,7 @@ class Login extends Component {
     const { isEnterButtonDisabled, name, loading, redirect } = this.state;
 
     if (loading) {
-      return <LoadingOne/> /*<div>Carregando...</div>*/;
+      return <LoadingOne/>
     }
     if (redirect) {
       return <Redirect to="/search" />;
@@ -60,7 +57,6 @@ class Login extends Component {
         <section className='flex flex-col items-center justify-center '>
         <header>
         <h1 className="text-6xl my-5 text-purple-800">
-         {/* <img src={imageMusica} alt="Logo de nota musical" />  */}
          YourMusic
         </h1>
         <hr />

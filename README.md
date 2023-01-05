@@ -65,7 +65,7 @@ Inicie a aplicação
 
 https://user-images.githubusercontent.com/99992471/210630189-6f13fdf5-106d-4815-b10e-c9a1959e4e1f.mp4
 
-Este projeto foi desenvolvido inspirado no projeto Trybe Tunes proposto no curso de Desenvolvimento Full Stack da [Trybe](https://www.betrybe.com/) no qual os alunos deveriam desenvolve-lo para fins didáticos
+Este projeto foi desenvolvido inspirado no projeto Trybe Tunes proposto no curso de Desenvolvimento Full Stack da [Trybe](https://www.betrybe.com/) no qual os alunos deveriam desenvolve-lo para fins didáticos, os arquivos na pasta src/services são de autoria da Trybe
 
 
 

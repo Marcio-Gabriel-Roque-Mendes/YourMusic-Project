@@ -68,4 +68,5 @@ https://user-images.githubusercontent.com/99992471/210630189-6f13fdf5-106d-4815-
 ## Desenvolvido por: 
 Marcio Gabriel Roque Mendes
 
+### Observações:
 Este projeto foi desenvolvido inspirado no projeto Trybe Tunes proposto no curso de Desenvolvimento Full Stack da [Trybe](https://www.betrybe.com/) no qual os alunos deveriam desenvolve-lo para fins didáticos, os arquivos na pasta src/services são de autoria da Trybe

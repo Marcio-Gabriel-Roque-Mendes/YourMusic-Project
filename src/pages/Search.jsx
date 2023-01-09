@@ -87,8 +87,8 @@ class Search extends Component {
       <h4 key={ album.releaseDate }>
         Lançado em:
         {' '}
+        {/* {new Date(album.releaseDate).getFullYear()} <- Apenas o ano de lançamento  */}
         {moment(album.releaseDate).format('DD/MM/YYYY')} 
-        {/* {moment(album.releaseDate).format('DD/MM/YYYY')} */}
          ,
        </h4>
       
@@ -138,9 +138,13 @@ class Search extends Component {
         {nomeArtistaPosterior}
       </p>
     );
-
+    
     const condicaoSeRenderizaAlbum = todasMusicas.length === 0
-      ? <p className='flex content-center text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas);
+      ? <p className='flex content-center text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas).sort( (a, b) =>  new Date(b.props.children[5].key).getFullYear() - new Date(a.props.children[5].key).getFullYear());
+    
+    // Referência: https://pt.stackoverflow.com/questions/100068/ordenando-um-array-de-objetos-por-data
+    // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+    // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
 
     return (
       <div data-testid="page-search" className='flex flex-col flex-wrap /*content-center*/ bg-violet-100'>

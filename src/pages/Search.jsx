@@ -13,32 +13,24 @@ class Search extends Component {
     isSearchButtonDisabled: true,
     nameArtist: '',
     loading: false,
-    todasMusicas: [],
-    nomeArtistaPosterior: '',
+    allSongs: [],
+    nameArtistInResults: '',
     quantityAlbuns: 24,
   }
 
-  setar = () => {
-    const { quantityAlbuns } = this.state;
-    this.setState({ quantityAlbuns: quantityAlbuns + numberAlbumsToAdd,
-    });
-  }
-
   showMoreAlbums = async (event) => {
-    // this.setar.call();
-    const { nomeArtistaPosterior, quantityAlbuns, todasMusicas } = this.state;
+    const { nameArtistInResults, quantityAlbuns } = this.state;
     event.preventDefault();
-    const doubleQuantity = quantityAlbuns + numberAlbumsToAdd;
-    const nomeDoArtista = nomeArtistaPosterior;
-    const novo = await searchAlbumsAPI(nomeDoArtista, doubleQuantity);
+    const sumQuantity = quantityAlbuns + numberAlbumsToAdd;
+    const theNameOfTheArtist = nameArtistInResults;
+    const requestGettingMoreAlbums = await searchAlbumsAPI(
+      theNameOfTheArtist, sumQuantity,
+    );
     this.setState({
-      todasMusicas: novo,
-      quantityAlbuns: doubleQuantity,
+      allSongs: requestGettingMoreAlbums,
+      quantityAlbuns: sumQuantity,
     });
-    console.log(todasMusicas);
   }
-
-  // useEffect(() => {}, [this.state.quantityAlbuns]);
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -62,13 +54,14 @@ class Search extends Component {
     const { nameArtist, quantityAlbuns } = this.state;
     event.preventDefault();
     this.setState({ loading: true }, async () => {
-      const nomeDoArtista = nameArtist;
-      const albumProcura = await searchAlbumsAPI(nomeDoArtista, quantityAlbuns);
+      const theNameOfTheArtist = nameArtist;
+      const albumProcura = await searchAlbumsAPI(theNameOfTheArtist, quantityAlbuns);
       this.setState({
         nameArtist: '',
         loading: false,
-        todasMusicas: albumProcura,
-        nomeArtistaPosterior: nomeDoArtista,
+        allSongs: albumProcura,
+        nameArtistInResults: theNameOfTheArtist,
+        quantityAlbuns: numberAlbumsToAdd,
       });
     });
   }
@@ -77,8 +70,8 @@ class Search extends Component {
     <div
       key={ album.collectionName }
       className="w-56 text-center content-center border-solid border-1 border-black-600
-      mx-px my-3
-     rounded text-fuchsia-900 "
+    mx-px my-3
+   rounded text-fuchsia-900 "
     >
       <img
         src={ album.artworkUrl100 }
@@ -133,7 +126,7 @@ class Search extends Component {
 
   render() {
     const { isSearchButtonDisabled,
-      nameArtist, loading, nomeArtistaPosterior, todasMusicas } = this.state;
+      nameArtist, loading, nameArtistInResults, allSongs } = this.state;
 
     const condicicaoLoading = loading ? <LoadingFive /> : (
       <form className="flex justify-center mb-2.5 mt-10 text-indigo-800">
@@ -168,41 +161,31 @@ class Search extends Component {
       </form>
     );
 
-    const condicaoResultAlbuns = nomeArtistaPosterior.length !== 0 && (
+    const condicaoResultAlbuns = nameArtistInResults.length !== 0 && (
       <p className="flex justify-center mb-20 text-indigo-800">
         Resultado de álbuns de:
         {' '}
-        {nomeArtistaPosterior}
+        {nameArtistInResults}
       </p>
     );
 
-    const condicaoSeRenderizaAlbum = todasMusicas.length === 0
+    const condicaoSeRenderizaAlbum = allSongs.length === 0
       ? <p className="flex content-center text-indigo-800">Nenhum álbum foi encontrado</p>
-      : this.estruturarCadaAlbum(todasMusicas).sort((a, b) => new Date(b.props.children[5]
+      : this.estruturarCadaAlbum(allSongs).sort((a, b) => new Date(b.props.children[5]
         .key).getFullYear() - new Date(a.props.children[5].key).getFullYear());
 
     // Referência: https://pt.stackoverflow.com/questions/100068/ordenando-um-array-de-objetos-por-data
     // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
 
-    const condicaoSeRenderizaAlbumEntaoMostraBotao = todasMusicas.length === 0
+    const condicaoSeRenderizaAlbumEntaoMostraBotao = allSongs.length === 0
       ? (
         <p className="text-indigo-100">
           .
         </p>
       )
       : (
-        <div className="flex justify-center mt-5">
-          <button
-            data-testid="search-artist-button"
-            type="submit"
-            onClick={ this.setar }
-            className="bg-indigo-700 hover:bg-indigo-500 text-white
-      font-bold py-1 px-4 rounded-full ml-4"
-          >
-            setar
-          </button>
-
+        <div className="flex justify-center text-xl mt-8 mb-10">
           <button
             data-testid="search-artist-button"
             type="submit"
@@ -232,5 +215,4 @@ class Search extends Component {
     );
   }
 }
-
 export default Search;

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import LoadingFive from '../components/LoadingFive';
 
-var moment = require('moment'); 
+const moment = require('moment');
+
+const numberAlbumsToAdd = 24;
 
 class Search extends Component {
   state = {
@@ -13,7 +15,30 @@ class Search extends Component {
     loading: false,
     todasMusicas: [],
     nomeArtistaPosterior: '',
+    quantityAlbuns: 24,
   }
+
+  setar = () => {
+    const { quantityAlbuns } = this.state;
+    this.setState({ quantityAlbuns: quantityAlbuns + numberAlbumsToAdd,
+    });
+  }
+
+  showMoreAlbums = async (event) => {
+    // this.setar.call();
+    const { nomeArtistaPosterior, quantityAlbuns, todasMusicas } = this.state;
+    event.preventDefault();
+    const doubleQuantity = quantityAlbuns + numberAlbumsToAdd;
+    const nomeDoArtista = nomeArtistaPosterior;
+    const novo = await searchAlbumsAPI(nomeDoArtista, doubleQuantity);
+    this.setState({
+      todasMusicas: novo,
+      quantityAlbuns: doubleQuantity,
+    });
+    console.log(todasMusicas);
+  }
+
+  // useEffect(() => {}, [this.state.quantityAlbuns]);
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -34,11 +59,11 @@ class Search extends Component {
   }
 
   onSearchButtonClick = async (event) => {
-    const { nameArtist } = this.state;
+    const { nameArtist, quantityAlbuns } = this.state;
     event.preventDefault();
     this.setState({ loading: true }, async () => {
       const nomeDoArtista = nameArtist;
-      const albumProcura = await searchAlbumsAPI(nomeDoArtista);
+      const albumProcura = await searchAlbumsAPI(nomeDoArtista, quantityAlbuns);
       this.setState({
         nameArtist: '',
         loading: false,
@@ -49,16 +74,27 @@ class Search extends Component {
   }
 
   estruturarCadaAlbum = (albuns) => albuns.map((album) => (
-    <div key={ album.collectionName } className='w-56 text-center content-center border-solid border-1 border-black-600 mx-px my-3 
-     rounded text-fuchsia-900 '>
-      <img src={ album.artworkUrl100 } alt={ album.artistName } className='w-56 justify-center rounded '/>
+    <div
+      key={ album.collectionName }
+      className="w-56 text-center content-center border-solid border-1 border-black-600
+      mx-px my-3
+     rounded text-fuchsia-900 "
+    >
+      <img
+        src={ album.artworkUrl100 }
+        alt={ album.artistName }
+        className="w-56 justify-center rounded "
+      />
 
       <Link
         to={ `/album/${album.collectionId}` }
         data-testid={ `link-to-album-${album.collectionId}` }
       >
-        <p className="bg-indigo-700 hover:bg-indigo-500 text-white font-bold py-1 px-1 my-3 rounded-full">
-        Musicas
+        <p
+          className="bg-indigo-700 hover:bg-indigo-500 text-white font-bold py-1 px-1 my-3
+          rounded-full"
+        >
+          Musicas
         </p>
         {' '}
 
@@ -70,7 +106,7 @@ class Search extends Component {
         {album.artistName}
         ,
       </h2>
-      
+
       <h2 key={ album.collectionName }>
         Álbum:
         {' '}
@@ -83,27 +119,27 @@ class Search extends Component {
         {`$ ${album.collectionPrice}`}
         ,
       </h4>
-      
+
       <h4 key={ album.releaseDate }>
         Lançado em:
         {' '}
         {/* {new Date(album.releaseDate).getFullYear()} <- Apenas o ano de lançamento  */}
-        {moment(album.releaseDate).format('DD/MM/YYYY')} 
-         ,
-       </h4>
-      
-      </div>
+        {moment(album.releaseDate).format('DD/MM/YYYY')}
+        ,
+      </h4>
+
+    </div>
   ));
 
   render() {
     const { isSearchButtonDisabled,
       nameArtist, loading, nomeArtistaPosterior, todasMusicas } = this.state;
 
-    const condicicaoLoading = loading ? <LoadingFive />: (
-      <form className='flex justify-center mb-2.5 mt-10 text-indigo-800'>
-        <label htmlFor="nameArtist" className='flex flex-row'>      
-          <div className='text-xl font-bold'>
-          Nome do Artista:
+    const condicicaoLoading = loading ? <LoadingFive /> : (
+      <form className="flex justify-center mb-2.5 mt-10 text-indigo-800">
+        <label htmlFor="nameArtist" className="flex flex-row">
+          <div className="text-xl font-bold">
+            Nome do Artista:
           </div>
           <input
             id="nameArtist"
@@ -113,9 +149,9 @@ class Search extends Component {
             maxLength={ 40 }
             onChange={ this.onInputChange }
             value={ nameArtist }
-            autocomplete='off'
-            placeholder='Escreva aqui'
-            className='text-center bg-gray-100 border-2 rounded border-violet-900 ml-2.5'
+            autoComplete="off"
+            placeholder="Escreva aqui"
+            className="text-center bg-gray-100 border-2 rounded border-violet-900 ml-2.5"
           />
         </label>
         { ' ' }
@@ -124,7 +160,8 @@ class Search extends Component {
           type="submit"
           onClick={ this.onSearchButtonClick }
           disabled={ isSearchButtonDisabled }
-          class="bg-indigo-700 hover:bg-indigo-500 text-white font-bold py-1 px-4 rounded-full ml-4"
+          className="bg-indigo-700 hover:bg-indigo-500 text-white
+          font-bold py-1 px-4 rounded-full ml-4"
         >
           Pesquisar
         </button>
@@ -132,33 +169,68 @@ class Search extends Component {
     );
 
     const condicaoResultAlbuns = nomeArtistaPosterior.length !== 0 && (
-      <p className='flex justify-center mb-20 text-indigo-800'>
+      <p className="flex justify-center mb-20 text-indigo-800">
         Resultado de álbuns de:
         {' '}
         {nomeArtistaPosterior}
       </p>
     );
-    
+
     const condicaoSeRenderizaAlbum = todasMusicas.length === 0
-      ? <p className='flex content-center text-indigo-800'>Nenhum álbum foi encontrado</p> : this.estruturarCadaAlbum(todasMusicas).sort( (a, b) =>  new Date(b.props.children[5].key).getFullYear() - new Date(a.props.children[5].key).getFullYear());
-    
+      ? <p className="flex content-center text-indigo-800">Nenhum álbum foi encontrado</p>
+      : this.estruturarCadaAlbum(todasMusicas).sort((a, b) => new Date(b.props.children[5]
+        .key).getFullYear() - new Date(a.props.children[5].key).getFullYear());
+
     // Referência: https://pt.stackoverflow.com/questions/100068/ordenando-um-array-de-objetos-por-data
     // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     // Referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
 
+    const condicaoSeRenderizaAlbumEntaoMostraBotao = todasMusicas.length === 0
+      ? (
+        <p className="text-indigo-100">
+          .
+        </p>
+      )
+      : (
+        <div className="flex justify-center mt-5">
+          <button
+            data-testid="search-artist-button"
+            type="submit"
+            onClick={ this.setar }
+            className="bg-indigo-700 hover:bg-indigo-500 text-white
+      font-bold py-1 px-4 rounded-full ml-4"
+          >
+            setar
+          </button>
+
+          <button
+            data-testid="search-artist-button"
+            type="submit"
+            onClick={ this.showMoreAlbums }
+            className="bg-indigo-700 hover:bg-indigo-500 text-white
+      font-bold py-1 px-4 rounded-full ml-4"
+          >
+            Mostra mais albuns
+          </button>
+        </div>
+      );
+
     return (
-      <div data-testid="page-search" className='flex flex-col flex-wrap /*content-center*/ bg-violet-100'>
+      <div data-testid="page-search" className="flex flex-col flex-wrap bg-violet-100">
         <Header />
         { condicicaoLoading }
         <div>
           {condicaoResultAlbuns}
         </div>
-        <div className='flex flex-row flex-wrap justify-between pr-14 pl-14' >
-        { condicaoSeRenderizaAlbum }
+        <div className="flex flex-row flex-wrap justify-between pr-14 pl-14">
+          { condicaoSeRenderizaAlbum }
         </div>
-
+        <div>
+          {condicaoSeRenderizaAlbumEntaoMostraBotao}
+        </div>
       </div>
     );
   }
 }
+
 export default Search;
